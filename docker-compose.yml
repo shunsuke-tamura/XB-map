@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  go:
+    container_name: go
+    build:
+      context: .
+      dockerfile: ./build/app/Dockerfile
+    ports:
+     - "8080:8080"
+    volumes:
+      - .:/go/src/app
+    depends_on:
+      - db
+    tty: true
+
+  db:
+    container_name: db
+    build:
+      context: .
+      dockerfile: ./build/db/Dockerfile
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: myapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./build/db/my.cnf:/etc/mysql/conf.d/my.cnf
