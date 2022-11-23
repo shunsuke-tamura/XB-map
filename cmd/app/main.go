@@ -1,13 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+  "github.com/LoliGothic/lottery-map/controller"
+)
 
 func main() {
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "SUCCESS",
-		})
-	})
-	r.Run()
+  router := controller.GetRouter()
+  router.Run(":8080")
 }
