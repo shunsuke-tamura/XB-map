@@ -23,7 +23,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: myapp
+      MYSQL_DATABASE: lottery-map
     ports:
       - "3306:3306"
     volumes:
