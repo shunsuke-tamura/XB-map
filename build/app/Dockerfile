@@ -13,10 +13,11 @@ COPY . /go/src/app/
 RUN go get -u github.com/cosmtrek/air && \
     go build -o /go/bin/air github.com/cosmtrek/air
 
-# gin，gorm，driverのインストール
+# gin，gorm，driver，uuidのインストール
 RUN go get -u github.com/gin-gonic/gin && \
     go get github.com/jinzhu/gorm && \
-    go get github.com/go-sql-driver/mysql
+    go get github.com/go-sql-driver/mysql && \
+    go get github.com/google/uuid
 
 # modファイルにあるパッケージをダウンロード
 RUN go mod download
