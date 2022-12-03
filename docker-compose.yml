@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-  go:
-    container_name: go
+  go_xb:
+    container_name: go_xb
     build:
       context: .
       dockerfile: ./build/app/Dockerfile
@@ -11,11 +11,11 @@ services:
     volumes:
       - .:/go/src/app
     depends_on:
-      - db
+      - db_xb
     tty: true
 
-  db:
-    container_name: db
+  db_xb:
+    container_name: db_xb
     build:
       context: .
       dockerfile: ./build/db/Dockerfile
@@ -23,8 +23,22 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: lottery-map
+      MYSQL_DATABASE: xb-map
     ports:
       - "3306:3306"
     volumes:
       - ./build/db/my.cnf:/etc/mysql/conf.d/my.cnf
+  
+  scraping_xb:
+    container_name: scraping_xb
+    build:
+      context: .
+      dockerfile: ./build/scraping/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./scraping:/scraping/src/app
+    depends_on:
+      - db_xb
+    tty: true
+    
