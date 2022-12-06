@@ -3,7 +3,7 @@ package model
 import (
 	"errors"
 	"strings"
-	"github.com/LoliGothic/lottery-map/crypto"
+	"github.com/LoliGothic/XB-map/crypto"
 	"github.com/google/uuid"
 )
 

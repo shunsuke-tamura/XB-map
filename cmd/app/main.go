@@ -1,7 +1,7 @@
 package main
 
 import (
-  "github.com/LoliGothic/lottery-map/controller"
+  "github.com/LoliGothic/XB-map/controller"
 )
 
 func main() {

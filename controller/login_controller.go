@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/LoliGothic/lottery-map/model"
+	"github.com/LoliGothic/XB-map/model"
 )
 
 type PreviousUser struct {

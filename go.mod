@@ -1,4 +1,4 @@
-module github.com/LoliGothic/lottery-map
+module github.com/LoliGothic/XB-map
 
 go 1.19
 
