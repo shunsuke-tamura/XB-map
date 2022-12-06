@@ -21,4 +21,5 @@ func init() {
 	
 	// dbをmigrateする
 	db.AutoMigrate(&User{})
+	db.AutoMigrate(&Shop{})
 }
