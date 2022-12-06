@@ -1,4 +1,4 @@
-FROM python:3.11.0-alpine
+FROM python:3.10.8-alpine3.16
 USER root
 
 RUN apk upgrade --update && \
