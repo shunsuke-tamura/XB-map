@@ -8,11 +8,12 @@ import (
 )
 
 type User struct {
-	Id int `gorm:"primaryKey"`
+	Id uint `gorm:"primaryKey"`
 	Uuid string
 	Name string
 	Password string
 	Email string
+	Reviews []Review
 }
 
 func Signup(name string, password string, email string) (*User, error) {

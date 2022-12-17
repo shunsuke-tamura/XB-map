@@ -5,7 +5,7 @@ import (
 )
 
 type Shop struct {
-	Id int `gorm:"primaryKey"`
+	Id uint `gorm:"primaryKey"`
 	Name string
 	Adress string
 	Lat float64
@@ -13,6 +13,7 @@ type Shop struct {
 	Type01 string
 	Type02 string
 	Type03 string
+	Reviews []Review
 }
 
 func ShopList()(*[]Shop, error) {
