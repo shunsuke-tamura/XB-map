@@ -8,7 +8,7 @@ import (
 )
 
 type User struct {
-	Id uint `gorm:"primaryKey"`
+	Id int `gorm:"primaryKey"`
 	Uuid string
 	Name string
 	Password string
@@ -58,6 +58,18 @@ func Login(password string, email string) (*User, error) {
 	if err != nil {
 		err := errors.New("パスワードが一致しませんでした")
 		return nil, err
+	}
+
+	return &user, nil
+}
+
+func UserData(uuid string) (*User, error) {
+	user := User{}
+
+	db.Where("uuid = ?", uuid).Find(&user)
+	if user.Id == 0 {
+		err := errors.New("ログイン情報と一致しません")
+		return nil , err
 	}
 
 	return &user, nil

@@ -5,7 +5,7 @@ import (
 )
 
 type Shop struct {
-	Id uint `gorm:"primaryKey"`
+	Id int `gorm:"primaryKey"`
 	Name string
 	Adress string
 	Lat float64

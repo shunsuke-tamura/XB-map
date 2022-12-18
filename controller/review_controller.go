@@ -7,15 +7,14 @@ import (
 )
 
 type NewReview struct {
-	UserId uint
-	ShopId uint
+	UserId int
+	ShopId int
 	Explanation string
 }
 
 func getReview(c *gin.Context) {
-	// c.Paramで取得できる値はstringなのでuint64のtmpにキャストした後，uintにキャストしてあげる
-	tmp, _ := strconv.ParseUint(c.Param("shopId"), 10, 64)
-	shopId := uint(tmp)
+	// c.Paramで取得できる値はstringなのでintにキャストしてあげる
+	shopId, _ := strconv.Atoi(c.Param("shopId"))
 	
 	review, err := model.ReviewList(shopId)
 
