@@ -18,6 +18,7 @@ func GetRouter() *gin.Engine {
 	router.GET("/shop", getShopList)
 	router.POST("/review", postReview)
 	router.GET("/review/:shopId", getReview)
+	router.GET("/user/:uuid", getUser)
 
 	return router
 }
