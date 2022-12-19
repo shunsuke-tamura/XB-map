@@ -2,7 +2,6 @@ package controller
 
 import (
 	"time"
-
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -15,10 +14,11 @@ func GetRouter() *gin.Engine {
 
 	router.POST("/signup", postSingup)
 	router.POST("/login", postLogin)
-	router.GET("/shop", getShopList)
+	router.POST("/check", postCheckLogin) //ログイン状態をチェックする
 	router.POST("/review", postReview)
+	router.GET("/shop", getShopList)
 	router.GET("/review/:shopId", getReview)
-	router.GET("/user/:uuid", getUser)
+	router.DELETE("/review", deleteReview)
 
 	return router
 }
@@ -26,7 +26,7 @@ func GetRouter() *gin.Engine {
 func setCors(r *gin.Engine) {
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
-		AllowMethods:     []string{"PUT", "PATCH", "GET"},
+		AllowMethods:     []string{"PUT", "PATCH", "GET", "DELETE", "POST"},
 		AllowHeaders:     []string{"Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
