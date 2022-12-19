@@ -12,6 +12,11 @@ type NewReview struct {
 	Explanation string
 }
 
+type DeleteReview struct {
+	Id int
+	ShopId int
+}
+
 func getReview(c *gin.Context) {
 	// c.Paramで取得できる値はstringなのでintにキャストしてあげる
 	shopId, _ := strconv.Atoi(c.Param("shopId"))
@@ -29,6 +34,18 @@ func postReview(c *gin.Context) {
 	var newReview NewReview
 	c.BindJSON(&newReview)
 	review, err := model.AddReview(newReview.UserId, newReview.ShopId, newReview.Explanation)
+
+	if err == nil {
+		c.JSON(200, review)
+	} else {
+		c.JSON(500, err)
+	}
+}
+
+func deleteReview(c *gin.Context) {
+	var deleteReview DeleteReview
+	c.BindJSON(&deleteReview)
+	review, err := model.DeleteReview(deleteReview.Id, deleteReview.ShopId)
 
 	if err == nil {
 		c.JSON(200, review)

@@ -14,19 +14,21 @@ type Review struct {
 }
 
 type Result struct {
+	Id int
 	ShopId int
 	CreatedAt time.Time
 	Explanation string
-	Uuid string
 	Name string
+	Password string
+	Email string
 }
 
 func ReviewList(shopId int) (*[]Result, error) {
 	result := []Result{}
 
 	// shopIdの口コミを全て返す
-	// SELECT reviews.shop_id, reviews.created_at, reviews.explanation, users.uuid, users.name FROM `reviews` inner join users on reviews.user_id = users.id WHERE reviews.shop_id = shopId ORDER BY reviews.created_at DESC;
-	db.Model(&Review{}).Select("reviews.shop_id, reviews.created_at, reviews.explanation, users.uuid, users.name").Joins("inner join users on users.id = reviews.user_id").Where("reviews.shop_id = ?", shopId).Order("reviews.created_at desc").Scan(&result)
+	// SELECT reviews.shop_id, reviews.created_at, reviews.explanation, users.name, users.password, users.email FROM `reviews` inner join users on reviews.user_id = users.id WHERE reviews.shop_id = shopId ORDER BY reviews.created_at DESC;
+	db.Model(&Review{}).Select("reviews.id, reviews.shop_id, reviews.created_at, reviews.explanation, users.name, users.password, users.email").Joins("inner join users on users.id = reviews.user_id").Where("reviews.shop_id = ?", shopId).Order("reviews.created_at desc").Scan(&result)
 
 	fmt.Println(&result)
 	return &result, nil
@@ -40,9 +42,22 @@ func AddReview(userId int, shopId int, explanation string) (*[]Result, error) {
 	db.Create(&review)
 
 	// shopIdの口コミを全て返す
-	// SELECT reviews.shop_id, reviews.created_at, reviews.explanation, users.uuid, users.name FROM `reviews` inner join users on reviews.user_id = users.id WHERE reviews.shop_id = shopId ORDER BY reviews.created_at DESC;
-	db.Model(&Review{}).Select("reviews.shop_id, reviews.created_at, reviews.explanation, users.uuid, users.name").Joins("inner join users on users.id = reviews.user_id").Where("reviews.shop_id = ?", shopId).Order("reviews.created_at desc").Scan(&result)
+	// SELECT reviews.shop_id, reviews.created_at, reviews.explanation, users.name, users.password, users.email FROM `reviews` inner join users on reviews.user_id = users.id WHERE reviews.shop_id = shopId ORDER BY reviews.created_at DESC;
+	db.Model(&Review{}).Select("reviews.id, reviews.shop_id, reviews.created_at, reviews.explanation, users.name, users.password, users.email").Joins("inner join users on users.id = reviews.user_id").Where("reviews.shop_id = ?", shopId).Order("reviews.created_at desc").Scan(&result)
 
 	fmt.Println(&result)
+	return &result, nil
+}
+
+func DeleteReview(id int, shopId int) (*[]Result, error) {
+	result := []Result{}
+
+	// DELETE FROM reviews WHERE id = ?;
+	db.Delete(&Review{}, id)
+
+	// shopIdの口コミを全て返す
+	// SELECT reviews.shop_id, reviews.created_at, reviews.explanation, users.name, users.password, users.email FROM `reviews` inner join users on reviews.user_id = users.id WHERE reviews.shop_id = shopId ORDER BY reviews.created_at DESC;
+	db.Model(&Review{}).Select("reviews.id, reviews.shop_id, reviews.created_at, reviews.explanation, users.name, users.password, users.email").Joins("inner join users on users.id = reviews.user_id").Where("reviews.shop_id = ?", shopId).Order("reviews.created_at desc").Scan(&result)
+
 	return &result, nil
 }
