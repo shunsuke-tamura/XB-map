@@ -44,3 +44,16 @@ func postSingup(c *gin.Context) {
 		c.JSON(400, err.Error())
 	}
 }
+
+func postCheckLogin(c *gin.Context) {
+	var loginUser PreviousUser
+	c.BindJSON(&loginUser)
+	user, err := model.CheckLogin(loginUser.Password, loginUser.Email)
+	if err == nil {
+		fmt.Println("good")
+		c.JSON(200, user)
+	} else {
+		fmt.Println("bad")
+		c.JSON(500, err.Error())
+	}
+}

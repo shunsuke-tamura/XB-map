@@ -63,11 +63,11 @@ func Login(password string, email string) (*User, error) {
 	return &user, nil
 }
 
-func UserData(uuid string) (*User, error) {
+func CheckLogin(password string, email string) (*User, error) {
 	user := User{}
 
-	db.Where("uuid = ?", uuid).Find(&user)
-	if user.Id == 0 {
+	db.Where("email = ?", email).Find(&user)
+	if user.Id == 0 || user.Password != password {
 		err := errors.New("ログイン情報と一致しません")
 		return nil , err
 	}
