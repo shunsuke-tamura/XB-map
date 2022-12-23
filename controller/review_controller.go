@@ -26,7 +26,7 @@ func getReview(c *gin.Context) {
 	if err == nil {
 		c.JSON(200, review)
 	} else {
-		c.JSON(500, err)
+		c.JSON(400, err.Error())
 	}
 }
 
@@ -38,7 +38,7 @@ func postReview(c *gin.Context) {
 	if err == nil {
 		c.JSON(200, review)
 	} else {
-		c.JSON(500, err)
+		c.JSON(400, err.Error())
 	}
 }
 
@@ -50,6 +50,6 @@ func deleteReview(c *gin.Context) {
 	if err == nil {
 		c.JSON(200, review)
 	} else {
-		c.JSON(500, err)
+		c.JSON(400, err.Error())
 	}
 }

@@ -2,7 +2,9 @@ package model
 
 import (
 	"fmt"
+	"errors"
 	"time"
+	"unicode/utf8"
 	"gorm.io/gorm"
 )
 
@@ -35,6 +37,11 @@ func ReviewList(shopId int) (*[]Result, error) {
 }
 
 func AddReview(userId int, shopId int, explanation string) (*[]Result, error) {
+	if utf8.RuneCountInString(explanation) <= 0 || utf8.RuneCountInString(explanation) > 100 {
+		err := errors.New("口コミは100文字以内で入力してください")
+		return nil, err
+	}
+
 	review := Review{UserId: userId, ShopId: shopId, Explanation: explanation}
 	result := []Result{}
 
