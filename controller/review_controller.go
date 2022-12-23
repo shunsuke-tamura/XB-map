@@ -21,13 +21,9 @@ func getReview(c *gin.Context) {
 	// c.Paramで取得できる値はstringなのでintにキャストしてあげる
 	shopId, _ := strconv.Atoi(c.Param("shopId"))
 	
-	review, err := model.ReviewList(shopId)
+	review := model.ReviewList(shopId)
 
-	if err == nil {
-		c.JSON(200, review)
-	} else {
-		c.JSON(400, err.Error())
-	}
+	c.JSON(200, review)
 }
 
 func postReview(c *gin.Context) {
@@ -45,11 +41,7 @@ func postReview(c *gin.Context) {
 func deleteReview(c *gin.Context) {
 	var deleteReview DeleteReview
 	c.BindJSON(&deleteReview)
-	review, err := model.DeleteReview(deleteReview.Id, deleteReview.ShopId)
+	review := model.DeleteReview(deleteReview.Id, deleteReview.ShopId)
 
-	if err == nil {
-		c.JSON(200, review)
-	} else {
-		c.JSON(400, err.Error())
-	}
+	c.JSON(200, review)
 }
