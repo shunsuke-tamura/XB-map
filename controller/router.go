@@ -12,6 +12,8 @@ func GetRouter() *gin.Engine {
 	// corsの設定
 	setCors(router)
 
+	router.PATCH("/name", patchName)
+	router.PATCH("/password", patchPassword)
 	router.POST("/signup", postSingup)
 	router.POST("/login", postLogin)
 	router.POST("/check", postCheckLogin) //ログイン状態をチェックする
