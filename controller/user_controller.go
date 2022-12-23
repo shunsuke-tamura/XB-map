@@ -6,16 +6,43 @@ import (
 	"github.com/LoliGothic/XB-map/model"
 )
 
-func getUser(c *gin.Context) {
-	uuid := c.Param("uuid")
-	fmt.Println(uuid)
+type NewName struct {
+	Email string
+	NewName string
+}
 
-	user, err := model.UserData(uuid)
+type NewPassword struct {
+	Email string
+	CurrentPassword string
+	NewPassword string
+	CheckNewPassword string
+}
 
-	fmt.Println(user)
+func patchName(c *gin.Context) {
+	var newName NewName
+	c.BindJSON(&newName)
+	fmt.Println(newName)
+
+	err := model.ChangeName(newName.Email, newName.NewName)
 	if err == nil {
+		fmt.Println("good")
+	} else {
+		fmt.Println("bad")
+		c.JSON(400, err.Error())
+	}
+}
+
+func patchPassword(c *gin.Context) {
+	var newPassword NewPassword
+	c.BindJSON(&newPassword)
+	fmt.Println(newPassword)
+
+	user, err := model.ChangePassword(newPassword.Email, newPassword.CurrentPassword, newPassword.NewPassword, newPassword.CheckNewPassword)
+	if err == nil {
+		fmt.Println("good")
 		c.JSON(200, user)
 	} else {
-		c.JSON(500, err.Error())
+		fmt.Println("bad")
+		c.JSON(400, err.Error())
 	}
 }
