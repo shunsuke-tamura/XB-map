@@ -14,6 +14,7 @@ type PreviousUser struct {
 type NewUser struct {
 	Name string
 	Password string
+	CheckPassword string
 	Email string
 }
 
@@ -35,7 +36,7 @@ func postSingup(c *gin.Context) {
 	var newUser NewUser //NewUser型の変数を定義
 	c.BindJSON(&newUser) //受け取ったJSONをnewUserに代入
 	fmt.Println(newUser.Email)
-	user, err := model.Signup(newUser.Name, newUser.Password, newUser.Email)
+	user, err := model.Signup(newUser.Name, newUser.Password, newUser.CheckPassword, newUser.Email)
 	if err == nil {
 		fmt.Println("good")
 		c.JSON(200, user)
