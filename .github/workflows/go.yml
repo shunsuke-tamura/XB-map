@@ -18,7 +18,7 @@ jobs:
       with:
         go-version: 1.19
 
-    - name: Copy static cmc files
+    - name: Copy static cmd files
       run: xcopy /i cmd build\cmd
 
     - name: Copy static controller files
