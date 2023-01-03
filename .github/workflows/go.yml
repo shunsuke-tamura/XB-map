@@ -19,7 +19,7 @@ jobs:
         go-version: 1.19
 
     - name: Copy static cmd files
-      run: cp -i cmd build\cmd
+      run: cp cmd build\cmd
 
     - name: Copy static controller files
       run: cp controller build\controller
