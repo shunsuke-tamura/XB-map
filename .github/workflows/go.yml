@@ -22,13 +22,13 @@ jobs:
       run: cp -r cmd build/cmd
 
     - name: Copy static controller files
-      run: cp -r controller controller
+      run: cp -r controller build/controller
 
     - name: Copy static crypto files
-      run: cp -r crypto crypto
+      run: cp -r crypto build/crypto
 
     - name: Copy static model files
-      run: cp -r model model
+      run: cp -r model build/model
 
     - name: Build
       run: go build -o cmd/app/go-app.exe -v
