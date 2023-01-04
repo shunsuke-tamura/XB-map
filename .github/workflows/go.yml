@@ -3,8 +3,8 @@ name: Build Go app and push to Azure
 on:
   push:
     branches: [ master ]
-  # pull_request:
-  #   branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
 
@@ -39,5 +39,5 @@ jobs:
         # Name of the Azure Web App
         app-name: xb-map-backend
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-        package: cmd/app
+        package: cmd/app/*
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
