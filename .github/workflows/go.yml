@@ -18,6 +18,15 @@ jobs:
       with:
         go-version: 1.19
 
+    - name: Copy static controller files
+      run: cp -r controller build/controller
+
+    - name: Copy static crypto files
+      run: cp -r crypto build/crypto
+
+    - name: Copy static model files
+      run: cp -r model build/model
+
     - name: Build
       run: go build -o build/go-app.exe -v ./cmd/app
 
@@ -30,5 +39,5 @@ jobs:
         # Name of the Azure Web App
         app-name: xb-map-backend
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-        package: build/
+        package: cmd/app
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
