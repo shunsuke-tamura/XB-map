@@ -31,7 +31,7 @@ jobs:
       run: cp -r model build/model
 
     - name: Build
-      run: go build -o cmd/app/go-app.exe -v
+      run: go build -o build/cmd/app/go-app.exe -v
 
     - name: Test
       run: go test
