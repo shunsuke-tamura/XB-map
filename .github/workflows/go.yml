@@ -30,14 +30,11 @@ jobs:
     - name: Copy static model files
       run: cp -r model build/model
 
-    # - name: Cd cmd
-    #   run: cd ./cmd/app
-
     - name: Build
       run: go build -o build/go-app.exe -v ./cmd/app
 
     - name: Test
-      run: go test
+      run: go test ./cmd/app
       
     - name: Deploy to Azure
       uses: Azure/webapps-deploy@v2
