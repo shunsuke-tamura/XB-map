@@ -28,7 +28,7 @@ jobs:
     #   run: cp -r model build/model
 
     - name: Build
-      run: go build -o ./tmp/main ./cmd/app/main.go
+      run: go build -o ./tmp/go-app ./cmd/app/main.go
 
     # - name: Test
     #   run: go test ./cmd/app
@@ -39,5 +39,5 @@ jobs:
         # Name of the Azure Web App
         app-name: xb-map-backend
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-        package: cmd/app/*
+        package: tmp
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
