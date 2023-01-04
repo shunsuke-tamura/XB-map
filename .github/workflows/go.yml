@@ -30,6 +30,9 @@ jobs:
     - name: Build
       run: go build -o ./tmp/go-app ./cmd/app/main.go
 
+    - name: zipping
+      run: zip tmp tmp
+
     # - name: Test
     #   run: go test ./cmd/app
       
@@ -39,5 +42,5 @@ jobs:
         # Name of the Azure Web App
         app-name: xb-map-backend
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-        package: tmp
+        package: tmp.zip
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
